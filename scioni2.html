@@ -1,315 +1,336 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hommage à SCIONI RAFFAELE</title>
-  <style>
-    /* Styles de base */
-    body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      background-color: #f2f2f2;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hommage</title>
+<style>
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #222;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
-    .container {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #111;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  text-align: center;
+}
 
-    header h1 {
-      font-size: 2.2em;
-      margin-bottom: 5px;
-    }
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+  color: #ffc107;
+}
 
-    header .dates {
-      font-size: 1.1em;
-      color: #666;
-    }
+header .dates {
+  font-size: 1.1em;
+  color: #ccc;
+}
 
-    .portrait img {
-      max-width: 250px;
-      border-radius: 50%;
-      margin: 20px 0;
-    }
+.portrait img {
+  max-width: 200px;
+  border-radius: 50%;
+  margin: 20px 0;
+  border: 3px solid #ffc107;
+}
 
-    .texte {
-      font-size: 1.1em;
-      line-height: 1.6;
-      margin: 20px 0;
-    }
+.texte {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 20px 0;
+}
 
-    .infos h2 {
-      margin-top: 30px;
-      font-size: 1.4em;
-      color: #444;
-    }
+.infos h2 {
+  margin-top: 30px;
+  font-size: 1.4em;
+  color: #ffc107;
+}
 
-    /* Bougie et compteur */
-    .bougie {
-      margin-top: 30px;
-    }
+.bougie-section {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
 
-    #candleBtnWrapper {
-      position: relative;
-      display: inline-block;
-    }
+.candle-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
 
-    #candleBtn {
-      font-size: 2em;
-      padding: 10px 25px;
-      cursor: pointer;
-      background-color: #ffc107;
-      border: none;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-    }
+.candle-btn {
+  font-size: 1.6em;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background-color: #555;
+  color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+}
 
-    #candleBtn:hover {
-      background-color: #ffca2c;
-    }
+.candle-btn.lit {
+  background-color: #ffc107;
+  box-shadow: 0 0 20px rgba(255,183,0,0.7);
+}
 
-    #candleBtn.lit {
-      background-color: #ffb700;
-      box-shadow: 0 0 20px rgba(255, 183, 0, 0.7);
-    }
+.flame {
+  position: absolute;
+  top: -40px;
+  width: 14px;
+  height: 28px;
+  background: radial-gradient(ellipse at center, #ffec42 0%, #ff8c00 70%, #ff4d00 100%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  animation: flicker 0.3s infinite alternate;
+}
 
-    #counter {
-      font-size: 1.2em;
-      margin-top: 10px;
-      color: #555;
-    }
+@keyframes flicker {
+  0% { transform: translateX(0) scaleY(1) scaleX(1); opacity: 1; }
+  25% { transform: translateX(-2px) scaleY(1.1) scaleX(0.95); opacity: 0.85; }
+  50% { transform: translateX(2px) scaleY(0.9) scaleX(1.05); opacity: 1; }
+  75% { transform: translateX(-1px) scaleY(1.05) scaleX(0.9); opacity: 0.9; }
+  100% { transform: translateX(1px) scaleY(1) scaleX(1); opacity: 1; }
+}
 
-    .flame {
-      position: absolute;
-      top: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 14px;
-      height: 28px;
-      background: radial-gradient(ellipse at center, #ffec42 0%, #ff8c00 70%, #ff4d00 100%);
-      border-radius: 50%;
-      opacity: 0;
-      pointer-events: none;
-      animation: flicker 0.3s infinite alternate;
-    }
+.counter {
+  font-size: 1.2em;
+}
 
-    @keyframes flicker {
-      0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
-      50% { transform: translateX(-50%) scaleY(1.2) scaleX(0.9); opacity: 0.8; }
-      100% { transform: translateX(-50%) scaleY(0.9) scaleX(1.1); opacity: 1; }
-    }
+.messages {
+  margin-top: 40px;
+  text-align: left;
+}
 
-    /* Chat et messages */
-    .messages {
-      margin-top: 50px;
-      text-align: left;
-    }
+.message {
+  border-bottom: 1px solid #444;
+  padding: 10px 0;
+}
 
-    #msgForm input[type="text"],
-    #msgForm textarea {
-      width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      font-size: 1em;
-    }
+.message .ts {
+  font-size: 0.9em;
+  color: #aaa;
+}
 
-    #msgForm button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-      border: none;
-      border-radius: 8px;
-      background-color: #28a745;
-      color: #fff;
-      transition: all 0.2s ease;
-    }
+#msgForm input, #msgForm textarea {
+  width: 100%;
+  padding: 5px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #222;
+  color: #fff;
+}
 
-    #msgForm button:hover {
-      background-color: #218838;
-    }
+#msgForm button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+}
 
-    #messages h2 {
-      margin-top: 30px;
-      font-size: 1.3em;
-      color: #444;
-    }
-
-    #msgList {
-      margin-top: 10px;
-      max-height: 300px;
-      overflow-y: auto;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: #fafafa;
-    }
-
-    .message {
-      border-bottom: 1px solid #ddd;
-      padding: 8px 0;
-    }
-
-    .message:last-child {
-      border-bottom: none;
-    }
-
-    .message .ts {
-      font-size: 0.85em;
-      color: #999;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: #666;
-    }
-  </style>
+footer {
+  margin-top: 40px;
+  font-size: 0.9em;
+  color: #ccc;
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Hommage à SCIONI RAFFAELE</h1>
-      <p class="dates">07.12.1904 – 10.09.1990</p>
-    </header>
 
-    <section class="portrait">
-      <img src="SCIONI_RAFAELE.jpg" alt="Portrait de SCIONI RAFFAELE">
-    </section>
+<script>
+/* === PARAMÈTRES DU DÉFUNT ET CÉRÉMONIE === */
+const DEFUNT = {
+  nom: "SCIONI RAFFAELE",
+  dates: "07.12.1904 – 10.09.1990",
+  portrait: "SCIONI_RAFAELE.jpg",
+  texte: [
+    "Avec patience et passion, Raffaele a parcouru forêts et clairières...",
+    "Raffaele restera à jamais dans nos cœurs..."
+  ],
+  ceremonie: {
+    lieu: "Cathédrale Sainte Marie de Cagliari",
+    dateHeure: "15.09.1990 à 10h00",
+    contact: "natureetgravure@gmail.ch"
+  }
+};
 
-    <section class="texte">
-      <p>Avec patience et passion, Raffaele a parcouru forêts et clairières, toujours guidé par le chant des oiseaux et la beauté de la nature. Chasseur habile et respectueux, il savait allier courage et sagesse, transmettant à tous autour de lui l’amour des grands espaces et le respect de la faune. Son regard attentif et sa précision légendaire resteront à jamais dans nos mémoires.</p>
+/* URL de ton Apps Script */
+const BASE_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; 
+</script>
 
-      <p>Raffaele restera à jamais dans nos cœurs, non seulement comme un chasseur passionné, mais surtout comme un père, frère et ami extraordinaire. Sa famille se souvient de chaque instant passé avec lui dans les bois, de son rire chaleureux au retour de la chasse et de sa générosité sans limite. Chaque souvenir partagé est un trésor que nous chérirons pour toujours.</p>
-    </section>
+<div class="container">
+  <header>
+    <h1 id="defuntNom"></h1>
+    <p class="dates" id="defuntDates"></p>
+  </header>
 
-    <section class="infos">
-      <h2>Informations sur la cérémonie</h2>
-      <p><strong>Lieu :</strong> Cathédrale Sainte Marie de Cagliari</p>
-      <p><strong>Date et heure :</strong> 15.09.1990 à 10h00</p>
-      <p><strong>Contact :</strong> natureetgravure@gmail.ch</p>
-    </section>
+  <section class="portrait">
+    <img id="defuntPortrait" src="" alt="Portrait">
+  </section>
 
-    <!-- Bougie -->
-    <section class="bougie">
-      <div id="candleBtnWrapper">
-        <div class="flame" id="flame"></div>
-        <button id="candleBtn">🕯 Allumer la bougie</button>
-      </div>
-      <div id="counter">Chargement…</div>
-    </section>
+  <section class="texte" id="defuntTexte"></section>
 
-    <!-- Chat -->
-    <section class="messages">
-      <h2>Laisse un message</h2>
-      <form id="msgForm">
-        <label>
-          Ton nom:<br>
-          <input type="text" name="name" required>
-        </label><br><br>
-        <label>
-          Ton message:<br>
-          <textarea name="message" rows="4" cols="50" required></textarea>
-        </label><br><br>
-        <button type="submit">Envoyer</button>
-      </form>
+  <section class="infos">
+    <h2>Informations sur la cérémonie</h2>
+    <p><strong>Lieu :</strong> <span id="ceremonieLieu"></span></p>
+    <p><strong>Date et heure :</strong> <span id="ceremonieDate"></span></p>
+    <p><strong>Contact :</strong> <span id="ceremonieContact"></span></p>
+  </section>
 
-      <div id="messages">
-        <h2>Messages</h2>
-        <div id="msgList">Chargement…</div>
-      </div>
-    </section>
+  <!-- Bougies -->
+  <section class="bougie-section">
+    <div class="candle-wrapper" id="candleContainer">
+      <!-- Bougies générées en JS -->
+    </div>
+    <div class="counter" id="counter">Chargement…</div>
+  </section>
 
-    <footer>
-      <p>&copy; Nature & Gravure</p>
-    </footer>
-  </div>
+  <!-- Formulaire messages -->
+  <section class="messages">
+    <h2>Laisse un message</h2>
+    <form id="msgForm">
+      <label>Ton nom:<br><input type="text" name="name" required></label><br><br>
+      <label>Ton message:<br><textarea name="message" rows="4" required></textarea></label><br><br>
+      <button type="submit">Envoyer</button>
+    </form>
 
-  <!-- JavaScript -->
-  <script>
-    const BASE_URL = "https://script.google.com/macros/s/AKfycbzeSEPrzC79BlWCa5Xk3spNNndKRE2TCYLhBwsm0kVioGu-hiNEaZyuWMHuEHlXlQQ4/exec";
+    <div id="messages">
+      <h2>Messages</h2>
+      <div id="msgList">Chargement…</div>
+    </div>
+  </section>
 
-    const flame = document.getElementById('flame');
-    const candleBtn = document.getElementById('candleBtn');
+  <footer>
+    <p>&copy; Nature & Gravure</p>
+  </footer>
+</div>
 
-    function updateCounter() {
-      fetch(BASE_URL + '?action=getCount')
-        .then(r => r.json())
-        .then(d => {
-          document.getElementById('counter').innerText = "Nombre de bougies : " + d.count;
-        })
-        .catch(console.error);
-    }
+<script>
+/* === INIT PAGE === */
+document.getElementById('defuntNom').innerText = DEFUNT.nom;
+document.getElementById('defuntDates').innerText = DEFUNT.dates;
+document.getElementById('defuntPortrait').src = DEFUNT.portrait;
 
-    candleBtn.addEventListener('click', () => {
-      fetch(BASE_URL + '?action=incrementCount')
-        .then(r => r.json())
-        .then(d => {
-          document.getElementById('counter').innerText = "Nombre de bougies : " + d.count;
-        })
-        .catch(console.error);
+const texteContainer = document.getElementById('defuntTexte');
+DEFUNT.texte.forEach(p => {
+  let parag = document.createElement('p');
+  parag.innerText = p;
+  texteContainer.appendChild(parag);
+});
 
-      // Allumer la flamme
-      flame.style.opacity = '1';
-      candleBtn.classList.add('lit');
+document.getElementById('ceremonieLieu').innerText = DEFUNT.ceremonie.lieu;
+document.getElementById('ceremonieDate').innerText = DEFUNT.ceremonie.dateHeure;
+document.getElementById('ceremonieContact').innerText = DEFUNT.ceremonie.contact;
 
-      setTimeout(() => {
-        flame.style.opacity = '0';
-        candleBtn.classList.remove('lit');
-      }, 2000);
+/* === BOUCLES BOUCIES === */
+const candleContainer = document.getElementById('candleContainer');
+const NUM_BOUCIES = 5; // nombre de bougies à afficher
+for(let i=0;i<NUM_BOUCIES;i++){
+  let wrapper = document.createElement('div');
+  wrapper.style.position='relative';
+  wrapper.style.margin='0 5px';
+  wrapper.style.display='inline-block';
+
+  let btn = document.createElement('button');
+  btn.className='candle-btn';
+  btn.innerText='🕯';
+  btn.dataset.index=i;
+
+  let flame = document.createElement('div');
+  flame.className='flame';
+  flame.dataset.index=i;
+
+  let inputTime = document.createElement('input');
+  inputTime.type='number';
+  inputTime.value='2';
+  inputTime.min='1';
+  inputTime.style.width='50px';
+
+  wrapper.appendChild(flame);
+  wrapper.appendChild(btn);
+  wrapper.appendChild(inputTime);
+
+  candleContainer.appendChild(wrapper);
+
+  /* Événement bouton */
+  btn.addEventListener('click', ()=>{
+    // compteur Apps Script
+    fetch(BASE_URL+'?action=incrementCount').then(r=>r.json()).then(d=>{
+      document.getElementById('counter').innerText = "Nombre de bougies : "+d.count;
     });
 
-    const msgForm = document.getElementById('msgForm');
-    msgForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const data = new FormData(e.target);
-      const params = new URLSearchParams();
-      for (const pair of data.entries()) {
-        params.append(pair[0], pair[1]);
-      }
-      fetch(BASE_URL + '?action=postMessage&' + params.toString())
-        .then(r => r.json())
-        .then(() => {
-          e.target.reset();
-          loadMessages();
-        })
-        .catch(console.error);
-    });
+    let minutes = parseFloat(inputTime.value)||2;
+    let ms = minutes*60*1000;
 
-    function loadMessages() {
-      fetch(BASE_URL + '?action=getMessages')
-        .then(r => r.json())
-        .then(d => {
-          const cont = document.getElementById('msgList');
-          if (d.messages && d.messages.length) {
-            cont.innerHTML = d.messages.map(m =>
-              `<div class="message"><strong>${m.name}</strong> <span class="ts">(${m.timestamp})</span><br>${m.text}</div>`
-            ).join('');
-          } else {
-            cont.innerHTML = "<em>Aucun message pour l'instant.</em>";
-          }
-        })
-        .catch(console.error);
-    }
+    flame.style.opacity='1';
+    btn.classList.add('lit');
 
-    // Initialisation
-    updateCounter();
+    setTimeout(()=>{
+      flame.style.opacity='0';
+      btn.classList.remove('lit');
+    },ms);
+  });
+});
+
+/* === COMPTEUR ET MESSAGES === */
+function updateCounter(){
+  fetch(BASE_URL+'?action=getCount')
+  .then(r=>r.json())
+  .then(d=>{
+    document.getElementById('counter').innerText = "Nombre de bougies : "+d.count;
+  }).catch(console.error);
+}
+
+const msgForm = document.getElementById('msgForm');
+msgForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const data=new FormData(e.target);
+  const params=new URLSearchParams();
+  for(const pair of data.entries()) params.append(pair[0],pair[1]);
+
+  fetch(BASE_URL+'?action=postMessage&'+params.toString())
+  .then(r=>r.json())
+  .then(d=>{
+    e.target.reset();
     loadMessages();
+  }).catch(console.error);
+});
 
-    // Auto-refresh toutes les 3 secondes
-    setInterval(updateCounter, 3000);
-    setInterval(loadMessages, 3000);
-  </script>
+function loadMessages(){
+  fetch(BASE_URL+'?action=getMessages')
+  .then(r=>r.json())
+  .then(d=>{
+    const cont=document.getElementById('msgList');
+    if(d.messages && d.messages.length){
+      cont.innerHTML=d.messages.map(m=>`<div class="message"><strong>${m.name}</strong> <span class="ts">(${m.timestamp})</span><br>${m.text}</div>`).join('');
+    } else cont.innerHTML="<em>Aucun message pour l'instant.</em>";
+  }).catch(console.error);
+}
+
+// Initialisation
+updateCounter();
+loadMessages();
+</script>
+
 </body>
 </html>
