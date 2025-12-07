@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hommage</title>
 <style>
+/* === STYLE GLOBAL === */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: #222;
   color: #fff;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 .container {
@@ -46,12 +46,20 @@ header .dates {
   font-size: 1.1em;
   line-height: 1.6;
   margin: 20px 0;
+  text-align: justify;
 }
 
 .infos h2 {
   margin-top: 30px;
   font-size: 1.4em;
   color: #ffc107;
+  text-align: left;
+}
+
+.infos p {
+  font-size: 1.1em;
+  color: #ddd;
+  text-align: left;
 }
 
 .bougie-section {
@@ -60,20 +68,24 @@ header .dates {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  position: relative;
 }
 
 .candle-wrapper {
-  position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.candle-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
 }
 
 .candle-btn {
-  font-size: 1.6em;
-  padding: 10px 20px;
+  font-size: 2em;
+  padding: 10px 15px;
   cursor: pointer;
   border: none;
   border-radius: 10px;
@@ -90,7 +102,9 @@ header .dates {
 
 .flame {
   position: absolute;
-  top: -40px;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 14px;
   height: 28px;
   background: radial-gradient(ellipse at center, #ffec42 0%, #ff8c00 70%, #ff4d00 100%);
@@ -101,15 +115,16 @@ header .dates {
 }
 
 @keyframes flicker {
-  0% { transform: translateX(0) scaleY(1) scaleX(1); opacity: 1; }
-  25% { transform: translateX(-2px) scaleY(1.1) scaleX(0.95); opacity: 0.85; }
-  50% { transform: translateX(2px) scaleY(0.9) scaleX(1.05); opacity: 1; }
-  75% { transform: translateX(-1px) scaleY(1.05) scaleX(0.9); opacity: 0.9; }
-  100% { transform: translateX(1px) scaleY(1) scaleX(1); opacity: 1; }
+  0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+  25% { transform: translateX(-52%) scaleY(1.1) scaleX(0.95); opacity: 0.85; }
+  50% { transform: translateX(-48%) scaleY(0.9) scaleX(1.05); opacity: 1; }
+  75% { transform: translateX(-51%) scaleY(1.05) scaleX(0.9); opacity: 0.9; }
+  100% { transform: translateX(-49%) scaleY(1) scaleX(1); opacity: 1; }
 }
 
 .counter {
   font-size: 1.2em;
+  margin-top: 10px;
 }
 
 .messages {
@@ -152,6 +167,7 @@ footer {
   margin-top: 40px;
   font-size: 0.9em;
   color: #ccc;
+  text-align: center;
 }
 </style>
 </head>
@@ -164,8 +180,8 @@ const DEFUNT = {
   dates: "07.12.1904 – 10.09.1990",
   portrait: "SCIONI_RAFAELE.jpg",
   texte: [
-    "Avec patience et passion, Raffaele a parcouru forêts et clairières...",
-    "Raffaele restera à jamais dans nos cœurs..."
+    "Avec patience et passion, Raffaele a parcouru forêts et clairières, toujours guidé par le chant des oiseaux et la beauté de la nature.",
+    "Raffaele restera à jamais dans nos cœurs, non seulement comme un chasseur passionné, mais surtout comme un père, frère et ami extraordinaire."
   ],
   ceremonie: {
     lieu: "Cathédrale Sainte Marie de Cagliari",
@@ -199,9 +215,7 @@ const BASE_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
 
   <!-- Bougies -->
   <section class="bougie-section">
-    <div class="candle-wrapper" id="candleContainer">
-      <!-- Bougies générées en JS -->
-    </div>
+    <div class="candle-wrapper" id="candleContainer"></div>
     <div class="counter" id="counter">Chargement…</div>
   </section>
 
@@ -244,22 +258,18 @@ document.getElementById('ceremonieContact').innerText = DEFUNT.ceremonie.contact
 
 /* === BOUCLES BOUCIES === */
 const candleContainer = document.getElementById('candleContainer');
-const NUM_BOUCIES = 5; // nombre de bougies à afficher
+const NUM_BOUCIES = 5; // nombre de bougies
 for(let i=0;i<NUM_BOUCIES;i++){
   let wrapper = document.createElement('div');
-  wrapper.style.position='relative';
-  wrapper.style.margin='0 5px';
-  wrapper.style.display='inline-block';
+  wrapper.className='candle-container';
+
+  let flame = document.createElement('div');
+  flame.className='flame';
 
   let btn = document.createElement('button');
   btn.className='candle-btn';
   btn.innerText='🕯';
-  btn.dataset.index=i;
-
-  let flame = document.createElement('div');
-  flame.className='flame';
-  flame.dataset.index=i;
-
+  
   let inputTime = document.createElement('input');
   inputTime.type='number';
   inputTime.value='2';
@@ -269,17 +279,16 @@ for(let i=0;i<NUM_BOUCIES;i++){
   wrapper.appendChild(flame);
   wrapper.appendChild(btn);
   wrapper.appendChild(inputTime);
-
   candleContainer.appendChild(wrapper);
 
-  /* Événement bouton */
   btn.addEventListener('click', ()=>{
-    // compteur Apps Script
-    fetch(BASE_URL+'?action=incrementCount').then(r=>r.json()).then(d=>{
+    fetch(BASE_URL+'?action=incrementCount')
+    .then(r=>r.json())
+    .then(d=>{
       document.getElementById('counter').innerText = "Nombre de bougies : "+d.count;
     });
 
-    let minutes = parseFloat(inputTime.value)||2;
+    let minutes = parseFloat(inputTime.value) || 2;
     let ms = minutes*60*1000;
 
     flame.style.opacity='1';
@@ -288,7 +297,7 @@ for(let i=0;i<NUM_BOUCIES;i++){
     setTimeout(()=>{
       flame.style.opacity='0';
       btn.classList.remove('lit');
-    },ms);
+    }, ms);
   });
 });
 
