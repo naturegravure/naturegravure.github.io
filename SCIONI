@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hommage à SCIONI RAFFAELE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Hommage à SCIONI RAFFAELE</h1>
+      <p class="dates">07.12.1904 – 10.09.1990</p>
+    </header>
+
+    <section class="portrait">
+   <img src="SCIONI_RAFAELE.jpg" alt="Portrait de SCIONI RAFFAELE">
+    </section>
+
+    <section class="texte">
+      <p>Avec patience et passion, Raffaele a parcouru forêts et clairières, toujours guidé par le chant des oiseaux et la beauté de la nature. Chasseur habile et respectueux, il savait allier courage et sagesse, transmettant à tous autour de lui l’amour des grands espaces et le respect de la faune. Son regard attentif et sa précision légendaire resteront à jamais dans nos mémoires.</p>
+
+      <p>Raffaele restera à jamais dans nos cœurs, non seulement comme un chasseur passionné, mais surtout comme un père, frère et ami extraordinaire. Sa famille se souvient de chaque instant passé avec lui dans les bois, de son rire chaleureux au retour de la chasse et de sa générosité sans limite. Chaque souvenir partagé est un trésor que nous chérirons pour toujours.</p>
+    </section>
+
+    <section class="infos">
+      <h2>Informations sur la cérémonie</h2>
+      <p><strong>Lieu :</strong> Cathédrale Sainte Marie de Cagliari</p>
+      <p><strong>Date et heure :</strong> 15.09.1990 à 10h00</p>
+      <p><strong>Contact :</strong> natureetgravure@gmail.ch</p>
+    </section>
+
+    <footer>
+      <p>&copy; Nature & Gravure</p>
+    </footer>
+  </div>
+</body>
+</html>
