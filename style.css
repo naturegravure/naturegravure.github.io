@@ -1,32 +1,34 @@
-/* Flamme au-dessus du bouton */
+.bougie {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #candleBtnWrapper {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flame {
   position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px;
-  height: 28px;
+  top: -40px;
+  width: 16px;
+  height: 32px;
   background: radial-gradient(ellipse at center, #ffec42 0%, #ff8c00 70%, #ff4d00 100%);
-  border-radius: 50% 50% 50% 50%;
+  border-radius: 50%;
   opacity: 0;
-  pointer-events: none;
   animation: flicker 0.3s infinite alternate;
 }
 
-/* Animation de la flamme */
-@keyframes flicker {
-  0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
-  50% { transform: translateX(-50%) scaleY(1.2) scaleX(0.9); opacity: 0.8; }
-  100% { transform: translateX(-50%) scaleY(0.9) scaleX(1.1); opacity: 1; }
-}
-
-/* Bouton allumé */
-#candleBtn.lit {
-  background-color: #ffb700;
-  box-shadow: 0 0 20px rgba(255, 183, 0, 0.7);
+#candleBtn {
+  font-size: 2em;
+  padding: 10px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: #ffc107;
+  transition: all 0.2s ease;
 }
