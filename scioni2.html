@@ -3,118 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hommage</title>
+  <title>Hommage à SCIONI RAFFAELE</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Styles supplémentaires pour la bougie et messages */
+    #candleBtn { font-size: 2em; padding: 10px 20px; margin-top: 20px; cursor: pointer; }
+    #counter { font-size: 1.2em; margin-top: 10px; }
+    #messages { margin-top: 40px; }
+    .message { border-bottom: 1px solid #ccc; padding: 10px 0; }
+    .message .ts { font-size: 0.9em; color: #666; }
+    #msgForm { margin-top: 20px; }
+  </style>
 </head>
 <body>
   <div class="container">
-
-    <!-- ===== HEADER / DÉFUNT ===== -->
     <header>
-      <h1>Jean Dupont</h1>
-      <div class="dates">12/03/1950 - 05/12/2025</div>
+      <h1>Hommage à SCIONI RAFFAELE</h1>
+      <p class="dates">07.12.1904 – 10.09.1990</p>
     </header>
 
-    <!-- ===== PORTRAIT ===== -->
-    <div class="portrait">
-      <img src="portrait.jpg" alt="Portrait du défunt">
-    </div>
+    <section class="portrait">
+      <img src="SCIONI_RAFAELE.jpg" alt="Portrait de SCIONI RAFFAELE">
+    </section>
 
-    <!-- ===== TEXTE D’HOMMAGE ===== -->
-    <div class="texte">
-      <p>Nous nous souvenons avec tendresse de Jean, un être cher qui restera dans nos cœurs à jamais.</p>
-    </div>
+    <section class="texte">
+      <p>Avec patience et passion, Raffaele a parcouru forêts et clairières, toujours guidé par le chant des oiseaux et la beauté de la nature. Chasseur habile et respectueux, il savait allier courage et sagesse, transmettant à tous autour de lui l’amour des grands espaces et le respect de la faune. Son regard attentif et sa précision légendaire resteront à jamais dans nos mémoires.</p>
 
-    <!-- ===== INFORMATIONS SUR LA CÉRÉMONIE ===== -->
-    <div class="infos">
-      <h2>Cérémonie</h2>
-      <p>Date : 10 décembre 2025</p>
-      <p>Lieu : Église Saint-Pierre, Coincin</p>
-    </div>
+      <p>Raffaele restera à jamais dans nos cœurs, non seulement comme un chasseur passionné, mais surtout comme un père, frère et ami extraordinaire. Sa famille se souvient de chaque instant passé avec lui dans les bois, de son rire chaleureux au retour de la chasse et de sa générosité sans limite. Chaque souvenir partagé est un trésor que nous chérirons pour toujours.</p>
+    </section>
 
-    <!-- ===== BOUCIES ===== -->
-    <div class="bougie-section">
-      <h2>Allumez une bougie en sa mémoire</h2>
-      <div class="candle-wrapper" id="candleWrapper"></div>
-      <div class="counter" id="counter">0 bougie(s) allumée(s)</div>
-    </div>
+    <section class="infos">
+      <h2>Informations sur la cérémonie</h2>
+      <p><strong>Lieu :</strong> Cathédrale Sainte Marie de Cagliari</p>
+      <p><strong>Date et heure :</strong> 15.09.1990 à 10h00</p>
+      <p><strong>Contact :</strong> natureetgravure@gmail.ch</p>
+    </section>
 
-    <!-- ===== MESSAGES ===== -->
-    <div class="messages">
-      <h2>Messages</h2>
-      <div id="msgList"><em>Aucun message pour l'instant.</em></div>
+    <!-- Section Bougie et compteur -->
+    <section class="bougie">
+      <button id="candleBtn">🕯 Allumer la bougie</button>
+      <div id="counter">Chargement…</div>
+    </section>
 
+    <!-- Section Formulaire -->
+    <section class="messages">
+      <h2>Laisse un message</h2>
       <form id="msgForm">
-        <input type="text" id="name" placeholder="Votre nom" required>
-        <textarea id="text" placeholder="Votre message" required></textarea>
+        <label>
+          Ton nom:<br>
+          <input type="text" name="name" required>
+        </label><br><br>
+        <label>
+          Ton message:<br>
+          <textarea name="message" rows="4" cols="50" required></textarea>
+        </label><br><br>
         <button type="submit">Envoyer</button>
       </form>
-    </div>
+
+      <div id="messages">
+        <h2>Messages</h2>
+        <div id="msgList">Chargement…</div>
+      </div>
+    </section>
 
     <footer>
-      &copy; 2025 Hommage
+      <p>&copy; Nature & Gravure</p>
     </footer>
   </div>
 
   <script>
-    // ===== CONFIG =====
-    const BASE_URL = "https://script.google.com/macros/s/TON_URL/exec"; // Mets ici ton URL Apps Script
-    const NUM_BOUCIES = 5;
-
-    // ===== BOUCIES =====
-    const candleWrapper = document.getElementById('candleWrapper');
-    const counterEl = document.getElementById('counter');
-    let bougiesAllumees = 0;
+    const BASE_URL = "https://script.google.com/macros/s/AKfycbzeSEPrzC79BlWCa5Xk3spNNndKRE2TCYLhBwsm0kVioGu-hiNEaZyuWMHuEHlXlQQ4/exec";
 
     function updateCounter() {
-      counterEl.textContent = bougiesAllumees + " bougie(s) allumée(s)";
+      fetch(BASE_URL + '?action=getCount')
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById('counter').innerText = "Nombre de bougies : " + d.count;
+        })
+        .catch(console.error);
     }
 
-    for (let i = 0; i < NUM_BOUCIES; i++) {
-      const container = document.createElement('div');
-      container.className = 'candle-container';
-      const btn = document.createElement('button');
-      btn.className = 'candle-btn';
-      btn.textContent = '🕯️';
-      const flame = document.createElement('div');
-      flame.className = 'flame';
-      container.appendChild(btn);
-      container.appendChild(flame);
-      candleWrapper.appendChild(container);
-
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('lit');
-        flame.style.opacity = btn.classList.contains('lit') ? 1 : 0;
-        bougiesAllumees = document.querySelectorAll('.candle-btn.lit').length;
-        updateCounter();
-      });
-    }
-
-    // ===== MESSAGES =====
-    function loadMessages(){
-      fetch(BASE_URL+'?action=getMessages')
-      .then(r=>r.json())
-      .then(d=>{
-        const cont=document.getElementById('msgList');
-        if(d.messages && d.messages.length){
-          cont.innerHTML=d.messages.map(m=>`<div class="message"><strong>${m.name}</strong> <span class="ts">(${m.timestamp})</span><br>${m.text}</div>`).join('');
-        } else cont.innerHTML="<em>Aucun message pour l'instant.</em>";
-      }).catch(console.error);
-    }
-
-    document.getElementById('msgForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const text = document.getElementById('text').value.trim();
-      if(!name || !text) return;
-      fetch(BASE_URL+'?action=addMessage&name='+encodeURIComponent(name)+'&text='+encodeURIComponent(text))
-        .then(r=>r.json())
-        .then(()=>{
-          loadMessages();
-          document.getElementById('msgForm').reset();
-        }).catch(console.error);
+    document.getElementById('candleBtn').addEventListener('click', () => {
+      fetch(BASE_URL + '?action=incrementCount')
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById('counter').innerText = "Nombre de bougies : " + d.count;
+        })
+        .catch(console.error);
     });
 
+    document.getElementById('msgForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const params = new URLSearchParams();
+      for (const pair of data.entries()) {
+        params.append(pair[0], pair[1]);
+      }
+      fetch(BASE_URL + '?action=postMessage&' + params.toString())
+        .then(r => r.json())
+        .then(d => {
+          e.target.reset();
+          loadMessages();
+        })
+        .catch(console.error);
+    });
+
+    function loadMessages() {
+      fetch(BASE_URL + '?action=getMessages')
+        .then(r => r.json())
+        .then(d => {
+          const cont = document.getElementById('msgList');
+          if (d.messages && d.messages.length) {
+            cont.innerHTML = d.messages.map(m =>
+              `<div class="message"><strong>${m.name}</strong> <span class="ts">(${m.timestamp})</span><br>${m.text}</div>`
+            ).join('');
+          } else {
+            cont.innerHTML = "<em>Aucun message pour l'instant.</em>";
+          }
+        })
+        .catch(console.error);
+    }
+
+    // Initialisation
     updateCounter();
     loadMessages();
   </script>
