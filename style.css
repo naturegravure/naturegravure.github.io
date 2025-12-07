@@ -1,7 +1,7 @@
 /* === STYLE GLOBAL === */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f2f2f2; /* Fond clair pour pouvoir modifier facilement */
+  background-color: #f2f2f2;
   color: #333;
   margin: 0;
   padding: 0;
@@ -11,16 +11,16 @@ body {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background: #fff; /* Fond blanc pour le contenu */
+  background: #fff;
   border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
   text-align: center;
 }
 
 header h1 {
   font-size: 2.5em;
   margin-bottom: 5px;
-  color: #333; /* Couleur modifiable */
+  color: #333;
 }
 
 header .dates {
@@ -32,7 +32,7 @@ header .dates {
   max-width: 200px;
   border-radius: 50%;
   margin: 20px 0;
-  border: 3px solid #ffc107; /* Bord doré autour du portrait */
+  border: 3px solid #ffc107;
 }
 
 .texte {
@@ -84,14 +84,14 @@ header .dates {
   cursor: pointer;
   border: none;
   border-radius: 10px;
-  background-color: #555; /* Bouton gris par défaut */
+  background-color: #555;
   color: #fff;
   transition: all 0.3s ease;
   position: relative;
 }
 
 .candle-btn.lit {
-  background-color: #ffc107; /* Bouton jaune allumé */
+  background-color: #ffc107;
   box-shadow: 0 0 20px rgba(255,183,0,0.7);
 }
 
@@ -146,6 +146,7 @@ header .dates {
   border: 1px solid #ccc;
   background-color: #fff;
   color: #333;
+  margin-top: 5px;
 }
 
 #msgForm button {
