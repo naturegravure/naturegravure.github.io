@@ -43,15 +43,3 @@ header .dates {
   font-size: 1.4em;
   color: #444;
 }
-
-.infos p {
-  font-size: 1em;
-  margin: 5px 0;
-  color: #555;
-}
-
-footer {
-  margin-top: 40px;
-  font-size: 0.9em;
-  color: #888;
-}
