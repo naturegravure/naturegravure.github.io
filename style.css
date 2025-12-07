@@ -1,45 +1,32 @@
-body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f2f2f2;
-  color: #333;
-  margin: 0;
-  padding: 0;
+/* Flamme au-dessus du bouton */
+#candleBtnWrapper {
+  position: relative;
+  display: inline-block;
 }
 
-.container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  text-align: center;
+.flame {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 28px;
+  background: radial-gradient(ellipse at center, #ffec42 0%, #ff8c00 70%, #ff4d00 100%);
+  border-radius: 50% 50% 50% 50%;
+  opacity: 0;
+  pointer-events: none;
+  animation: flicker 0.3s infinite alternate;
 }
 
-header h1 {
-  font-size: 2.2em;
-  margin-bottom: 5px;
+/* Animation de la flamme */
+@keyframes flicker {
+  0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+  50% { transform: translateX(-50%) scaleY(1.2) scaleX(0.9); opacity: 0.8; }
+  100% { transform: translateX(-50%) scaleY(0.9) scaleX(1.1); opacity: 1; }
 }
 
-header .dates {
-  font-size: 1.1em;
-  color: #666;
-}
-
-.portrait img {
-  max-width: 250px;
-  border-radius: 50%;
-  margin: 20px 0;
-}
-
-.texte {
-  font-size: 1.1em;
-  line-height: 1.6;
-  margin: 20px 0;
-}
-
-.infos h2 {
-  margin-top: 30px;
-  font-size: 1.4em;
-  color: #444;
+/* Bouton allumé */
+#candleBtn.lit {
+  background-color: #ffb700;
+  box-shadow: 0 0 20px rgba(255, 183, 0, 0.7);
 }
