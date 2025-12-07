@@ -1,34 +1,168 @@
-.bougie {
+/* === STYLE GLOBAL === */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f2f2f2; /* Fond clair pour pouvoir modifier facilement */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff; /* Fond blanc pour le contenu */
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+  color: #333; /* Couleur modifiable */
+}
+
+header .dates {
+  font-size: 1.1em;
+  color: #666;
+}
+
+.portrait img {
+  max-width: 200px;
+  border-radius: 50%;
+  margin: 20px 0;
+  border: 3px solid #ffc107; /* Bord doré autour du portrait */
+}
+
+.texte {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 20px 0;
+  text-align: justify;
+  color: #444;
+}
+
+.infos h2 {
   margin-top: 30px;
+  font-size: 1.4em;
+  color: #333;
+  text-align: left;
+}
+
+.infos p {
+  font-size: 1.1em;
+  color: #555;
+  text-align: left;
+}
+
+/* === BOUCIES === */
+.bougie-section {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
-#candleBtnWrapper {
-  position: relative;
-  display: inline-flex;
+.candle-wrapper {
+  display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.candle-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.candle-btn {
+  font-size: 2em;
+  padding: 10px 15px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background-color: #555; /* Bouton gris par défaut */
+  color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.candle-btn.lit {
+  background-color: #ffc107; /* Bouton jaune allumé */
+  box-shadow: 0 0 20px rgba(255,183,0,0.7);
 }
 
 .flame {
   position: absolute;
-  top: -40px;
-  width: 16px;
-  height: 32px;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 28px;
   background: radial-gradient(ellipse at center, #ffec42 0%, #ff8c00 70%, #ff4d00 100%);
   border-radius: 50%;
   opacity: 0;
+  pointer-events: none;
   animation: flicker 0.3s infinite alternate;
 }
 
-#candleBtn {
-  font-size: 2em;
-  padding: 10px 30px;
-  border-radius: 10px;
+@keyframes flicker {
+  0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+  25% { transform: translateX(-52%) scaleY(1.1) scaleX(0.95); opacity: 0.85; }
+  50% { transform: translateX(-48%) scaleY(0.9) scaleX(1.05); opacity: 1; }
+  75% { transform: translateX(-51%) scaleY(1.05) scaleX(0.9); opacity: 0.9; }
+  100% { transform: translateX(-49%) scaleY(1) scaleX(1); opacity: 1; }
+}
+
+.counter {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+/* === MESSAGES === */
+.messages {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.message {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.message .ts {
+  font-size: 0.9em;
+  color: #888;
+}
+
+#msgForm input, #msgForm textarea {
+  width: 100%;
+  padding: 5px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+#msgForm button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  font-size: 1em;
+  border-radius: 5px;
   cursor: pointer;
+  background-color: #28a745;
+  color: #fff;
   border: none;
-  background-color: #ffc107;
-  transition: all 0.2s ease;
+}
+
+/* === FOOTER === */
+footer {
+  margin-top: 40px;
+  font-size: 0.9em;
+  color: #888;
+  text-align: center;
 }
