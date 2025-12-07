@@ -4,19 +4,177 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hommage à SCIONI RAFFAELE</title>
-  <link rel="stylesheet" href="style.css">
   <style>
-    /* Styles supplémentaires pour la bougie et messages */
-    body { font-family: sans-serif; max-width: 700px; margin: 2em auto; line-height: 1.6; }
-    header { text-align: center; }
-    .portrait img { max-width: 100%; border-radius: 10px; }
-    #candleBtn { font-size: 2em; padding: 10px 20px; margin-top: 20px; cursor: pointer; }
-    #counter { font-size: 1.2em; margin-top: 10px; }
-    #messages { margin-top: 40px; }
-    .message { border-bottom: 1px solid #ccc; padding: 10px 0; }
-    .message .ts { font-size: 0.9em; color: #666; }
-    #msgForm { margin-top: 20px; }
-    footer { text-align: center; margin-top: 50px; font-size: 0.9em; color: #666; }
+    /* Styles de base */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      margin-bottom: 5px;
+    }
+
+    header .dates {
+      font-size: 1.1em;
+      color: #666;
+    }
+
+    .portrait img {
+      max-width: 250px;
+      border-radius: 50%;
+      margin: 20px 0;
+    }
+
+    .texte {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin: 20px 0;
+    }
+
+    .infos h2 {
+      margin-top: 30px;
+      font-size: 1.4em;
+      color: #444;
+    }
+
+    /* Bougie et compteur */
+    .bougie {
+      margin-top: 30px;
+    }
+
+    #candleBtnWrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    #candleBtn {
+      font-size: 2em;
+      padding: 10px 25px;
+      cursor: pointer;
+      background-color: #ffc107;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    #candleBtn:hover {
+      background-color: #ffca2c;
+    }
+
+    #candleBtn.lit {
+      background-color: #ffb700;
+      box-shadow: 0 0 20px rgba(255, 183, 0, 0.7);
+    }
+
+    #counter {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    .flame {
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 28px;
+      background: radial-gradient(ellipse at center, #ffec42 0%, #ff8c00 70%, #ff4d00 100%);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: flicker 0.3s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+      50% { transform: translateX(-50%) scaleY(1.2) scaleX(0.9); opacity: 0.8; }
+      100% { transform: translateX(-50%) scaleY(0.9) scaleX(1.1); opacity: 1; }
+    }
+
+    /* Chat et messages */
+    .messages {
+      margin-top: 50px;
+      text-align: left;
+    }
+
+    #msgForm input[type="text"],
+    #msgForm textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+
+    #msgForm button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #28a745;
+      color: #fff;
+      transition: all 0.2s ease;
+    }
+
+    #msgForm button:hover {
+      background-color: #218838;
+    }
+
+    #messages h2 {
+      margin-top: 30px;
+      font-size: 1.3em;
+      color: #444;
+    }
+
+    #msgList {
+      margin-top: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    .message {
+      border-bottom: 1px solid #ddd;
+      padding: 8px 0;
+    }
+
+    .message:last-child {
+      border-bottom: none;
+    }
+
+    .message .ts {
+      font-size: 0.85em;
+      color: #999;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -43,17 +201,16 @@
       <p><strong>Contact :</strong> natureetgravure@gmail.ch</p>
     </section>
 
-    <!-- Section Bougie et compteur -->
+    <!-- Bougie -->
     <section class="bougie">
-  <div id="candleBtnWrapper">
-    <div class="flame" id="flame"></div>
-    <button id="candleBtn">🕯 Allumer la bougie</button>
-  </div>
-  <div id="counter">Chargement…</div>
-</section>
+      <div id="candleBtnWrapper">
+        <div class="flame" id="flame"></div>
+        <button id="candleBtn">🕯 Allumer la bougie</button>
+      </div>
+      <div id="counter">Chargement…</div>
+    </section>
 
-
-    <!-- Section Formulaire -->
+    <!-- Chat -->
     <section class="messages">
       <h2>Laisse un message</h2>
       <form id="msgForm">
@@ -79,10 +236,13 @@
     </footer>
   </div>
 
+  <!-- JavaScript -->
   <script>
     const BASE_URL = "https://script.google.com/macros/s/AKfycbzeSEPrzC79BlWCa5Xk3spNNndKRE2TCYLhBwsm0kVioGu-hiNEaZyuWMHuEHlXlQQ4/exec";
 
-    // Compteur de bougies
+    const flame = document.getElementById('flame');
+    const candleBtn = document.getElementById('candleBtn');
+
     function updateCounter() {
       fetch(BASE_URL + '?action=getCount')
         .then(r => r.json())
@@ -92,17 +252,26 @@
         .catch(console.error);
     }
 
-    document.getElementById('candleBtn').addEventListener('click', () => {
+    candleBtn.addEventListener('click', () => {
       fetch(BASE_URL + '?action=incrementCount')
         .then(r => r.json())
         .then(d => {
           document.getElementById('counter').innerText = "Nombre de bougies : " + d.count;
         })
         .catch(console.error);
+
+      // Allumer la flamme
+      flame.style.opacity = '1';
+      candleBtn.classList.add('lit');
+
+      setTimeout(() => {
+        flame.style.opacity = '0';
+        candleBtn.classList.remove('lit');
+      }, 2000);
     });
 
-    // Chat
-    document.getElementById('msgForm').addEventListener('submit', e => {
+    const msgForm = document.getElementById('msgForm');
+    msgForm.addEventListener('submit', e => {
       e.preventDefault();
       const data = new FormData(e.target);
       const params = new URLSearchParams();
