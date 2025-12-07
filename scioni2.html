@@ -7,12 +7,16 @@
   <link rel="stylesheet" href="style.css">
   <style>
     /* Styles supplémentaires pour la bougie et messages */
+    body { font-family: sans-serif; max-width: 700px; margin: 2em auto; line-height: 1.6; }
+    header { text-align: center; }
+    .portrait img { max-width: 100%; border-radius: 10px; }
     #candleBtn { font-size: 2em; padding: 10px 20px; margin-top: 20px; cursor: pointer; }
     #counter { font-size: 1.2em; margin-top: 10px; }
     #messages { margin-top: 40px; }
     .message { border-bottom: 1px solid #ccc; padding: 10px 0; }
     .message .ts { font-size: 0.9em; color: #666; }
     #msgForm { margin-top: 20px; }
+    footer { text-align: center; margin-top: 50px; font-size: 0.9em; color: #666; }
   </style>
 </head>
 <body>
@@ -74,6 +78,7 @@
   <script>
     const BASE_URL = "https://script.google.com/macros/s/AKfycbzeSEPrzC79BlWCa5Xk3spNNndKRE2TCYLhBwsm0kVioGu-hiNEaZyuWMHuEHlXlQQ4/exec";
 
+    // Compteur de bougies
     function updateCounter() {
       fetch(BASE_URL + '?action=getCount')
         .then(r => r.json())
@@ -92,6 +97,7 @@
         .catch(console.error);
     });
 
+    // Chat
     document.getElementById('msgForm').addEventListener('submit', e => {
       e.preventDefault();
       const data = new FormData(e.target);
@@ -101,7 +107,7 @@
       }
       fetch(BASE_URL + '?action=postMessage&' + params.toString())
         .then(r => r.json())
-        .then(d => {
+        .then(() => {
           e.target.reset();
           loadMessages();
         })
@@ -127,6 +133,10 @@
     // Initialisation
     updateCounter();
     loadMessages();
+
+    // Auto-refresh toutes les 3 secondes
+    setInterval(updateCounter, 3000);
+    setInterval(loadMessages, 3000);
   </script>
 </body>
 </html>
