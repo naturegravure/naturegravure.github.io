@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature & Gravure - Mémoriaux</title>
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 50px 20px; text-align: center; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h1 { color: #2c3e50; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        p { font-style: italic; color: #7f8c8d; }
+        .liste-hommages { margin-top: 40px; text-align: left; list-style: none; padding: 0; }
+        .liste-hommages li { padding: 15px; border-bottom: 1px solid #f0f0f0; }
+        .liste-hommages a { text-decoration: none; color: #27ae60; font-weight: bold; font-size: 1.2em; }
+        .liste-hommages a:hover { color: #1e8449; text-decoration: underline; }
+        footer { margin-top: 50px; font-size: 0.9em; color: #bdc3c7; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Espace Commémoratif</h1>
+    <p>À la mémoire de ceux qui nous ont quittés.</p>
+
+    <ul class="liste-hommages">
+        <li><a href="rosina_scioni.html">Rosina SCIONI (1904 - 1990)</a></li>
+        </ul>
+
+    <footer>
+        © Nature & Gravure
+    </footer>
+</div>
+
+</body>
+</html>
